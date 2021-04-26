@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet library="css" name="style.css"/>
+    </h:head>
+    <h:body onload="#{beanProduto.consultar()} #{beanCategoria.load()}">
+        <div class="topnav">
+            <a class="logo" href="#">LOGO</a>
+            <a href="index.jsf">Cadastros</a>
+            <a href="consultaproduto.jsf">Consultas</a>
+        </div>
+        <h:form>
+            <div class='ProductFilter'>
+                <h:panelGrid columns="2">
+
+                    <h:outputLabel>Nome:</h:outputLabel>
+                    <h:inputText value="#{beanProduto.descricao}" styleClass="inputText"/>
+
+                    <h:outputLabel>Categoria:</h:outputLabel>
+                    <h:selectOneMenu value="#{beanProduto.idcategoria}">
+                        <f:selectItem itemLabel="Selecione uma categoria..." />
+                        <f:selectItems value="#{beanCategoria.lista}" var="cat" itemValue="#{cat.idcategoria}" itemLabel="#{cat.descricao}" />
+                    </h:selectOneMenu>
+                    <h:outputLabel></h:outputLabel>
+                    <h:commandButton value="Pesquisar" action="#{beanProduto.consultar()}" styleClass="searchBottom"/>
+                </h:panelGrid>
+            </div>
+            <div class='ProductList'>
+                <h:dataTable var="ct" value="#{beanProduto.lista}" styleClass="productTable" >
+                    <h:column>
+                        <f:facet name="header">ID</f:facet>
+                        <h:outputLabel value="#{ct.idproduto}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Descrição</f:facet>
+                        <h:outputLabel value="#{ct.descricao}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Observação</f:facet>
+                        <h:outputLabel value="#{ct.observacao}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Preço</f:facet>
+                        <h:outputLabel value="#{ct.preco}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Estoque</f:facet>
+                        <h:outputLabel value="#{ct.estoque}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Categoria</f:facet>
+                        <h:outputLabel value="#{ct.dsccategoria}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Ações</f:facet>
+                        <h:commandButton value="Editar" action="#{beanProduto.redirectEditar(ct.idproduto)}" />
+                        <h:commandButton value="Excluir" action="#{beanProduto.delete(ct.idproduto)}" />
+                    </h:column>
+                </h:dataTable>
+            </div>
+        </h:form>
+    </h:body>
+</html>
+

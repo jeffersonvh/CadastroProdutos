@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet library="css" name="style.css"/>
+    </h:head>
+    <h:body onload="#{beanCategoria.load()}">
+        <div class="topnav">
+            <a class="logo" href="#">LOGO</a>
+            <a href="index.jsf">Cadastros</a>
+            <a href="consultaproduto.jsf">Consultas</a>
+        </div>
+        <h:form styleClass="productForm">
+            <h:messages></h:messages>
+            <h:panelGrid columns="1">
+                <h:outputLabel>Descrição</h:outputLabel>
+                <h:inputText value="#{beanProduto.descricao}" />
+
+                <h:outputLabel>Observação</h:outputLabel>
+                <h:inputText value="#{beanProduto.observacao}" />
+                
+                <h:outputLabel>Preço</h:outputLabel>
+                <h:inputText value="#{beanProduto.preco}" />
+                
+                <h:outputLabel>Estoque</h:outputLabel>
+                <h:inputText value="#{beanProduto.estoque}" />
+                
+                <h:outputLabel>Categoria</h:outputLabel>
+                <h:selectOneMenu value="#{beanProduto.idcategoria}">
+                    <f:selectItem itemLabel="Selecione uma categoria..." />
+                    <f:selectItems value="#{beanCategoria.lista}" var="cat" itemValue="#{cat.idcategoria}" itemLabel="#{cat.descricao}" />
+                </h:selectOneMenu>
+                <h:column>
+                    <h:commandButton value="Salvar" action="#{beanProduto.salvar()}" styleClass="salvarBottom"/>
+                    <h:commandButton value="Cancelar" styleClass="cancelarBottom"/>
+                </h:column>
+            </h:panelGrid>
+        </h:form>
+
+    </h:body>
+</html>
+

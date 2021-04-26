@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet library="css" name="style.css"/>
+    </h:head>
+    <h:body onload="#{beanProduto.consultarById(param.idproduto)} #{beanCategoria.load()}">
+        <div class="topnav">
+            <a class="logo" href="#">LOGO</a>
+            <a href="index.jsf">Cadastros</a>
+            <a href="consultaproduto.jsf">Consultas</a>
+        </div>
+        <div class='ProductFilter'>
+            <h:form>
+               <h:messages></h:messages>
+               <h:panelGrid columns="1">
+                   <h:outputLabel>Id</h:outputLabel>
+                   <h:inputText value="#{beanProduto.idproduto}" disabled="true"/>
+
+                   <h:outputLabel>Digite descrição</h:outputLabel>
+                   <h:inputText value="#{beanProduto.descricao}" />
+
+                   <h:outputLabel>Digite observação</h:outputLabel>
+                   <h:inputText value="#{beanProduto.observacao}" />
+
+                   <h:outputLabel>Digite preço</h:outputLabel>
+                   <h:inputText value="#{beanProduto.preco}" />
+
+                   <h:outputLabel>Digite estoque</h:outputLabel>
+                   <h:inputText value="#{beanProduto.estoque}" />
+
+                   <h:outputLabel>Digite Categoria</h:outputLabel>
+                   <h:selectOneMenu value="#{beanProduto.idcategoria}">
+                       <f:selectItems value="#{beanCategoria.lista}" var="cat" itemValue="#{cat.idcategoria}" itemLabel="#{cat.descricao}" />
+                   </h:selectOneMenu>
+
+                   <h:commandButton value="Salvar" action="#{beanProduto.update()}" styleClass="salvarBottom"/> 
+               </h:panelGrid>
+           </h:form>
+        </div>
+    </h:body>
+</html>
+
